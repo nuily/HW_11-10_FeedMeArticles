@@ -35,6 +35,13 @@ public class DataAdapter extends RecyclerView.Adapter {
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+
+
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         DataViewHolder dataViewHolder = (DataViewHolder) holder;
         Data cocktails = drinks.get(position);

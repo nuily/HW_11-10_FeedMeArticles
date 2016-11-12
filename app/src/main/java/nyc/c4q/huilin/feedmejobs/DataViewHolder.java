@@ -17,6 +17,7 @@ public class DataViewHolder extends RecyclerView.ViewHolder {
     private final TextView alcoholName;
 
 
+    // using ViewGroup (extends View) because it's passed in through the method calling this method
     public DataViewHolder(ViewGroup parent) {
         super(inflateView(parent));
         view = itemView;

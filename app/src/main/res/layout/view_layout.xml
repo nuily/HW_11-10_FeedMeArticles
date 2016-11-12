@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:layout_gravity="center"
-    card_view:cardCornerRadius="4dp">
+    card_view:cardCornerRadius="25dp">
 
     <LinearLayout
         android:id="@+id/cocktailsGalore"
@@ -27,5 +27,6 @@
             android:id="@+id/drink_alco"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
 </android.support.v7.widget.CardView>
