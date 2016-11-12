@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/buzz_feed"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin">
+
+
+    <ImageView
+        android:id="@+id/article_thumbnail"
+        android:layout_width="80dp"
+        android:scaleType="fitXY"
+        android:layout_height="60dp" />
+
+    <TextView
+        android:id="@+id/author_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="14dp"
+        android:text="Author Name"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_toRightOf="@id/article_thumbnail" />
+
+    <TextView
+        android:id="@+id/article_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="Article Title Goes Here"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@id/article_thumbnail"
+        android:layout_below="@id/author_name"
+        />
+
+    <TextView
+        android:id="@+id/article_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Article description goes here it might be long so here's a worst case scenario yadda yadda yadda"
+        android:textSize="12dp"
+        android:layout_below="@id/article_thumbnail"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:textColor="#666"/>
+
+    <TextView
+        android:id="@+id/article_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Article link goes here"
+        android:textSize="12dp"
+        android:layout_below="@id/article_description"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:textColor="#666"/>
+
+    <TextView
+        android:id="@+id/article_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Article publishing date"
+        android:textSize="12dp"
+        android:layout_below="@id/article_link"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:textColor="#666"/>
+
+</RelativeLayout>
