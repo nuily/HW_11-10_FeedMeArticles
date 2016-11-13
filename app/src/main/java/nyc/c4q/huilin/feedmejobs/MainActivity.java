@@ -10,15 +10,21 @@ import android.view.MenuItem;
 
 import nyc.c4q.huilin.feedmejobs.NoteFeature.NoteItem;
 import nyc.c4q.huilin.feedmejobs.NoteFeature.NotesAdapter;
+import nyc.c4q.huilin.feedmejobs.NoteFeature.NotesDataSource;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int REQUEST_CODE = 1111;
     private RecyclerView recyclerView;
+    private NotesDataSource notesDataSource;
+    private NoteItem note;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        notesDataSource = new NotesDataSource(this);
         initRV();
 
 
@@ -61,10 +67,25 @@ public class MainActivity extends AppCompatActivity {
     private void createNote() {
         NoteItem note = NoteItem.getNew();
         Intent intent = new Intent(this, NoteEditorActivity.class);
-        intent.putExtra("key", note.getKey());
-        intent.putExtra("text", note.getText());
-        startActivity(intent);
+        intent.putExtra(NoteEditorActivity.KEY, note.getKey());
+        intent.putExtra(NoteEditorActivity.TEXT, note.getText());
+        startActivityForResult(intent, REQUEST_CODE);
     }
 
+//    // put this in an onclick
+//    NoteItem note = NoteItem.get(position);
+//    Intent intent = new Intent(this, NoteEditorActivity.class);
+//    intent.putExtra("key", note.getKey());
+//    intent.putExtra("text", note.getText());
+//    startActivityForResult(intent, REQUEST_CODE);
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            note = new NoteItem();
+            note.setText(data.getStringExtra(NoteEditorActivity.KEY));
+            note.setText(data.getStringExtra(NoteEditorActivity.TEXT));
+            notesDataSource.update(note);
+        }
+    }
 }

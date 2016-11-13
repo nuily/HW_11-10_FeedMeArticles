@@ -16,8 +16,11 @@ import java.util.TreeSet;
 public class NotesDataSource {
 
 
-    private static final String PREF_KEY = "Notebook";
+    public static final String PREF_KEY = "Notebook";
     private SharedPreferences notesPref;
+
+    public NotesDataSource() {
+    }
 
     public NotesDataSource(Context context) {
         notesPref = context.getSharedPreferences(PREF_KEY, Context.MODE_PRIVATE);

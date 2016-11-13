@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import nyc.c4q.huilin.feedmejobs.NoteFeature.NoteItem;
@@ -13,6 +14,8 @@ import nyc.c4q.huilin.feedmejobs.NoteFeature.NoteItem;
  */
 public class NoteEditorActivity extends AppCompatActivity {
 
+    public static final String KEY = "key";
+    public static final String TEXT = "text";
     private NoteItem note;
     EditText editNote;
 
@@ -20,7 +23,7 @@ public class NoteEditorActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_note);
-        getActionBar();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = this.getIntent();
         note = new NoteItem();
@@ -39,14 +42,22 @@ public class NoteEditorActivity extends AppCompatActivity {
         String noteText = editNote.getText().toString();
 
         Intent intent = new Intent();
-        intent.putExtra("key", note.getKey());
-        intent.putExtra("text", noteText);
+        intent.putExtra(KEY, note.getKey());
+        intent.putExtra(TEXT, noteText);
         setResult(RESULT_OK, intent);
         finish();
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            saveAndFinish();
+        }
+        return false;
+    }
+
+    @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        saveAndFinish();
     }
 }
