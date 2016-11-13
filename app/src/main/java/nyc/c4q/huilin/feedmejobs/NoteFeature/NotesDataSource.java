@@ -2,6 +2,7 @@ package nyc.c4q.huilin.feedmejobs.NoteFeature;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,14 +20,16 @@ public class NotesDataSource {
 
     public static final String PREF_KEY = "Notebook";
     private SharedPreferences notesPref;
-    List<NoteItem> noteList = new ArrayList<NoteItem>();
+    private List<NoteItem> noteList = new ArrayList<NoteItem>();
+    private NoteItem note;
+
 
     public NotesDataSource() {
     }
 
     public NotesDataSource(Context context) {
         notesPref = context.getSharedPreferences(PREF_KEY, Context.MODE_PRIVATE);
-        NoteItem note = NoteItem.getNew();
+        note = NoteItem.getNew();
 
     }
 
@@ -61,6 +64,7 @@ public class NotesDataSource {
         SharedPreferences.Editor editor = notesPref.edit();
         editor.putString(note.getKey(), note.getText());
         editor.apply();
+        editor.commit();
 
     }
 
@@ -69,6 +73,14 @@ public class NotesDataSource {
             SharedPreferences.Editor editor = notesPref.edit();
             editor.remove(note.getKey());
             editor.apply();
+
+        }
+    }
+
+    public void viewAll() {
+        Map<String, ?> allEntries = notesPref.getAll();
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            Log.d("map values", entry.getKey() + ": " + entry.getValue().toString());
         }
     }
 }

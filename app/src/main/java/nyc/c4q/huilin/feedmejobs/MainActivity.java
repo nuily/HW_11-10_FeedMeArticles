@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
             note.setText(data.getStringExtra(NoteEditorActivity.TEXT));
             notesDataSource.update(note);
             notesAdapter.notifyDataSetChanged();
+            notesDataSource.viewAll();
+
         }
     }
 }

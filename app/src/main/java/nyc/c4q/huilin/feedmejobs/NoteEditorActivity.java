@@ -27,8 +27,8 @@ public class NoteEditorActivity extends AppCompatActivity {
 
         Intent intent = this.getIntent();
         note = new NoteItem();
-        note.setKey(intent.getStringExtra("key"));
-        note.setText(intent.getStringExtra("text"));
+        note.setKey(intent.getStringExtra(KEY));
+        note.setText(intent.getStringExtra(TEXT));
 
         editNote = (EditText) findViewById(R.id.note_writespace);
         editNote.setText(note.getText());

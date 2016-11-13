@@ -12,6 +12,9 @@ public class NoteItem {
     private String key;
     private String text;
 
+    public NoteItem() {
+    }
+
     public String getKey() {
         return key;
     }
