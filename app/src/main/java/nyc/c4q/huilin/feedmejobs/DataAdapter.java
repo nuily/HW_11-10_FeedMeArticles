@@ -9,6 +9,8 @@ import java.util.List;
 
 import nyc.c4q.huilin.feedmejobs.Pojos.BuzzArticles;
 
+import nyc.c4q.huilin.feedmejobs.pojos.Article;
+
 /**
  * Created by huilin on 10/30/16.
  */
@@ -30,6 +32,13 @@ public class DataAdapter extends RecyclerView.Adapter {
         this.buzzArticles = buzzArticles;
         notifyDataSetChanged();
     }
+    private List<Article> articleList;
+    private Context context;
+
+    public DataAdapter(Context context, List<Article> articleList){
+        this.articleList = articleList;
+        this.context = context;
+    }
 
 
     @Override
@@ -42,11 +51,15 @@ public class DataAdapter extends RecyclerView.Adapter {
         BuzzViewHolder buzzViewHolder = (BuzzViewHolder) holder;
         BuzzArticles buzzArticle = buzzArticles.get(position);
         buzzViewHolder.bind(buzzArticle);
+        DataViewHolder dataViewHolder = (DataViewHolder) holder;
+        Article article = articleList.get(position);
+        dataViewHolder.bind(article);
     }
 
 
     @Override
     public int getItemCount() {
         return buzzArticles.size();
+        return articleList.size();
     }
 }
