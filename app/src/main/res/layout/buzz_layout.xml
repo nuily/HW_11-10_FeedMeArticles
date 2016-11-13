@@ -4,9 +4,9 @@
     android:id="@+id/card_view"
     android:background="@android:color/darker_gray"
     android:layout_marginBottom="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/medium_margin"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:layout_gravity="center"
     card_view:cardCornerRadius="4dp">
 
     <RelativeLayout
@@ -14,14 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin">
+        android:padding="@dimen/medium_margin">
 
-
-        <ImageView
-            android:id="@+id/article_thumbnail"
-            android:layout_width="80dp"
-            android:scaleType="fitXY"
-            android:layout_height="60dp" />
 
         <TextView
             android:id="@+id/author_name"
@@ -30,21 +24,17 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="14dp"
             android:text="Author Name"
-            android:layout_marginLeft="5dp"
-            android:layout_marginBottom="@dimen/small_margin"
-            android:layout_toRightOf="@id/article_thumbnail" />
+            android:layout_marginBottom="@dimen/small_margin" />
 
         <TextView
             android:id="@+id/article_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="20dp"
             android:text="Article Title Goes Here"
             android:textColor="@color/colorAccent"
+            android:textStyle="bold"
             android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_toRightOf="@id/article_thumbnail"
             android:layout_below="@id/author_name"
             />
 
@@ -55,7 +45,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Article description goes here it might be long so here's a worst case scenario yadda yadda yadda"
             android:textSize="12dp"
-            android:layout_below="@id/article_thumbnail"
+            android:layout_below="@id/article_title"
             android:layout_marginTop="@dimen/medium_margin"
             android:textColor="#666"/>
 

@@ -1,12 +1,9 @@
 package nyc.c4q.huilin.feedmejobs;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import nyc.c4q.huilin.feedmejobs.Pojos.BuzzArticles;
@@ -16,19 +13,24 @@ import nyc.c4q.huilin.feedmejobs.Pojos.BuzzArticles;
  */
 public class DataAdapter extends RecyclerView.Adapter {
 
+    Context context;
     private List<BuzzArticles> buzzArticles;
 
-//    public DataAdapter(List<BuzzArticles> buzzArticles) {
-//        this.buzzArticles = buzzArticles;
-//    }
-
-    public DataAdapter() {
-        this.buzzArticles = new ArrayList<>();
-    }
-
-    public void setBuzzArticles(List<BuzzArticles> buzzArticles) {
+    public DataAdapter(Context context, List<BuzzArticles> buzzArticles) {
+        this.context = context;
         this.buzzArticles = buzzArticles;
     }
+
+//    public DataAdapter() {
+//        this.buzzArticles = new ArrayList<>();
+//    }
+//
+//    public void setBuzzArticles(List<BuzzArticles> buzzArticles) {
+//        //  this.buzzArticles = buzzArticles;
+//        this.buzzArticles.clear();
+//        this.buzzArticles.addAll(buzzArticles);
+//        notifyDataSetChanged();
+//    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

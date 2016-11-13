@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import nyc.c4q.huilin.feedmejobs.Pojos.BuzzArticles;
@@ -16,7 +15,6 @@ import nyc.c4q.huilin.feedmejobs.Pojos.BuzzArticles;
 public class BuzzViewHolder extends RecyclerView.ViewHolder {
 
     private final View view;
-    private final ImageView thumbnail;
     private final TextView buzzAuthor;
     private final TextView buzzTitle;
     private final TextView buzzDescription;
@@ -27,7 +25,6 @@ public class BuzzViewHolder extends RecyclerView.ViewHolder {
     public BuzzViewHolder(ViewGroup parent) {
         super(inflateView(parent));
         view = itemView;
-        thumbnail = (ImageView) view.findViewById(R.id.article_thumbnail);
         buzzAuthor = (TextView) view.findViewById(R.id.author_name);
         buzzTitle = (TextView) view.findViewById(R.id.article_title);
         buzzDescription = (TextView) view.findViewById(R.id.article_description);
@@ -49,7 +46,6 @@ public class BuzzViewHolder extends RecyclerView.ViewHolder {
         buzzUrl.setText(buzzArticles.getUrl());
         buzzPubDate.setText(buzzArticles.getPublishedAt());
     }
-
 
 
 }

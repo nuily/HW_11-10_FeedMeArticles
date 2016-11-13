@@ -1,5 +1,8 @@
 package nyc.c4q.huilin.feedmejobs.Pojos;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,45 +12,49 @@ import java.util.List;
 
 public class BuzzResponse {
 
-    private List<BuzzArticles> buzzArticles = new ArrayList<BuzzArticles>();
-    private String sortBy;
-    private String source;
+    @SerializedName("status")
+    @Expose
     private String status;
+    @SerializedName("source")
+    @Expose
+    private String source;
+    @SerializedName("sortBy")
+    @Expose
+    private String sortBy;
+    @SerializedName("articles")
+    @Expose
+    private List<BuzzArticles> buzzArticlesList = new ArrayList<BuzzArticles>();
 
-    //    public List<BuzzArticles> getBuzzArticles() {
-//        return buzzArticles;
-//    }
 
     public List<BuzzArticles> getBuzzArticles() {
-        return buzzArticles;
+        return buzzArticlesList;
     }
-
 
     public void setBuzzArticles(List<BuzzArticles> buzzArticles) {
-        this.buzzArticles = buzzArticles;
+        this.buzzArticlesList = buzzArticles;
     }
 
-    public String getSortBy () {
+    public String getSortBy() {
         return sortBy;
     }
 
-    public void setSortBy (String sortBy) {
+    public void setSortBy(String sortBy) {
         this.sortBy = sortBy;
     }
 
-    public String getSource () {
+    public String getSource() {
         return source;
     }
 
-    public void setSource (String source) {
+    public void setSource(String source) {
         this.source = source;
     }
 
-    public String getStatus () {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus (String status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
