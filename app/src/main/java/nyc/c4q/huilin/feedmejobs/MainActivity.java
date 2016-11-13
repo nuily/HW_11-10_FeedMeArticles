@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private static Retrofit retrofit;
     private static Retrofit.Builder builder;
 
+    private DataAdapter adapter;
+
     private List<BuzzArticles> buzzArticlesList;
 
 
@@ -39,7 +41,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         buzzArticlesList = new ArrayList<>();
+        adapter = new DataAdapter(this);
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(adapter);
 
         getBuzzfeedArticles();
 //        llm = new LinearLayoutManager(this);
@@ -59,12 +65,18 @@ public class MainActivity extends AppCompatActivity {
         buzzArticleCall.enqueue(new Callback<BuzzResponse>() {
             @Override
             public void onResponse(Call<BuzzResponse> call, Response<BuzzResponse> response) {
-                BuzzResponse buzzResp = response.body();
-                buzzArticlesList = buzzResp.getBuzzArticles();
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                recyclerView.setAdapter(new DataAdapter(getApplicationContext(),buzzArticlesList));
-                Log.i("LIST:" ,buzzArticlesList.size()+"");
-                Log.d(TAG, "Success!" + response);
+
+                if (response.isSuccessful()) {
+                    BuzzResponse buzzResp = response.body();
+                    buzzArticlesList = buzzResp.getBuzzArticles();
+                   adapter.setBuzzArticles(buzzArticlesList);
+                    Log.i("LIST:", buzzArticlesList.size() + "");
+                    Log.d(TAG, "Success!" + response);
+                }
+
+//                else {
+//                    String errorMsg = response.errorBody().string();
+//                }
             }
 
             @Override
