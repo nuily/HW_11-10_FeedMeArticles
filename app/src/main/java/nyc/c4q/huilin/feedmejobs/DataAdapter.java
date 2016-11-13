@@ -1,32 +1,25 @@
 package nyc.c4q.huilin.feedmejobs;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import java.util.Arrays;
 import java.util.List;
+
+import nyc.c4q.huilin.feedmejobs.pojos.Article;
 
 /**
  * Created by huilin on 10/30/16.
  */
 public class DataAdapter extends RecyclerView.Adapter {
 
-    private List<Data> drinks = Arrays.asList(
-            new Data("Dark and Stormy", "Rum"),
-            new Data("Pina Colada", "Bacardi"),
-            new Data("Amaretto Sour", "Almond Liquer"),
-            new Data("Cocoloso", "Coconut Ciroc"),
-            new Data("Tequila Sunrise", "Tequila"),
-            new Data("Screwdriver", "Vodka and Orange juice"),
-            new Data("Long Island Iced tea", "Rum"),
-            new Data("Scotch and Coconut water", "Johnny Walker Whiskey"),
-            new Data("Whisky Ginger", "whisky"),
-            new Data("Incredible Hulk", "Red bull and Hypnotiq"),
-            new Data("Coquito", "Bacardi"),
-            new Data("Jungle Juice", "lots o'stuff"),
-            new Data("Lychee Soju", "Soju"),
-            new Data("Lychee Martini", "Lychee, Gin")
-    );
+    private List<Article> articleList;
+    private Context context;
+
+    public DataAdapter(Context context, List<Article> articleList){
+        this.articleList = articleList;
+        this.context = context;
+    }
 
 
     @Override
@@ -37,13 +30,13 @@ public class DataAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         DataViewHolder dataViewHolder = (DataViewHolder) holder;
-        Data cocktails = drinks.get(position);
-        dataViewHolder.bind(cocktails);
+        Article article = articleList.get(position);
+        dataViewHolder.bind(article);
     }
 
 
     @Override
     public int getItemCount() {
-        return drinks.size();
+        return articleList.size();
     }
 }
