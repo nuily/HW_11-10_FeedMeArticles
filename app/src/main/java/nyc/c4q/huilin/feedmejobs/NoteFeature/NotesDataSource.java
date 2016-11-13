@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
@@ -18,6 +19,7 @@ public class NotesDataSource {
 
     public static final String PREF_KEY = "Notebook";
     private SharedPreferences notesPref;
+    List<NoteItem> noteList = new ArrayList<NoteItem>();
 
     public NotesDataSource() {
     }
@@ -30,27 +32,29 @@ public class NotesDataSource {
 
     public List<NoteItem> findAll() {
 
-        Map<String, ?> notesMap = notesPref.getAll();
+        Map<String, ?> notesMap = new HashMap<>();
+        if (!notesMap.isEmpty()) {
+            notesMap = notesPref.getAll();
 
-        // Map is unordered so next step is to sort dat by the keys (new first)
+            // Map is unordered so next step is to sort dat by the keys (new first)
 
-        SortedSet<String> keys = new TreeSet<String>(notesMap.keySet());
-        // returns a listing of all the keys for all the noteList in the sharedPrefs
-        // treeset automatically returns data in a sorted set
+            SortedSet<String> keys = new TreeSet<String>(notesMap.keySet());
+            // returns a listing of all the keys for all the noteList in the sharedPrefs
+            // treeset automatically returns data in a sorted set
 
-        List<NoteItem> noteList = new ArrayList<NoteItem>();
+            // loop through the keys and add associated noteList to the list object
+            for (String key : keys) {
+                NoteItem note = new NoteItem();
+                note.setKey(key);
+                note.setText((String) notesMap.get(key));
+                noteList.add(note);
 
-        // loop through the keys and add associated noteList to the list object
-        for (String key : keys) {
-            NoteItem note = new NoteItem();
-            note.setKey(key);
-            note.setText((String) notesMap.get(key));
-            noteList.add(note);
+            }
+
+            return noteList;
 
         }
-
         return noteList;
-
     }
 
     public void update(NoteItem note) {

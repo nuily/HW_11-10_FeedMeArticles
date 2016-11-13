@@ -16,15 +16,16 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE = 1111;
     private RecyclerView recyclerView;
-    private NotesDataSource notesDataSource;
     private NoteItem note;
-
+    private NotesDataSource notesDataSource;
+    private NotesAdapter notesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        notesDataSource = new NotesDataSource(this);
+        notesDataSource = new NotesDataSource(getApplicationContext());
+        notesAdapter = new NotesAdapter(getApplicationContext());
         initRV();
 
 
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.setAdapter(new NotesAdapter(this));
+        recyclerView.setAdapter(notesAdapter);
     }
 
     @Override
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
             note.setText(data.getStringExtra(NoteEditorActivity.KEY));
             note.setText(data.getStringExtra(NoteEditorActivity.TEXT));
             notesDataSource.update(note);
+            notesAdapter.notifyDataSetChanged();
         }
     }
 }
