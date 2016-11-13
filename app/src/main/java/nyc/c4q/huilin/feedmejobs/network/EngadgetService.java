@@ -1,6 +1,6 @@
 package nyc.c4q.huilin.feedmejobs.network;
 
-import nyc.c4q.huilin.feedmejobs.pojos.EngadgetResponse;
+import nyc.c4q.huilin.feedmejobs.Pojos.EngadgetResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

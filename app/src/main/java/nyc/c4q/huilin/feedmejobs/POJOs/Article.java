@@ -1,4 +1,4 @@
-package nyc.c4q.huilin.feedmejobs.pojos;
+package nyc.c4q.huilin.feedmejobs.Pojos;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

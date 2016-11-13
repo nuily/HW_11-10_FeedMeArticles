@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import nyc.c4q.huilin.feedmejobs.pojos.Article;
+import nyc.c4q.huilin.feedmejobs.Pojos.Article;
 
 /**
  * Created by huilin on 10/30/16.

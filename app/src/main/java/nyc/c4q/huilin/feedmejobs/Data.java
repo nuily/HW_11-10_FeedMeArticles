@@ -30,3 +30,4 @@ public class Data {
     public void setAlcoholType(String alcoholType) {
         this.alcoholType = alcoholType;
     }
+}

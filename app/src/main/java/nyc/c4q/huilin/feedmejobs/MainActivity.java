@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nyc.c4q.huilin.feedmejobs.network.EngadgetService;
-import nyc.c4q.huilin.feedmejobs.pojos.Article;
-import nyc.c4q.huilin.feedmejobs.pojos.EngadgetResponse;
+import nyc.c4q.huilin.feedmejobs.Pojos.Article;
+import nyc.c4q.huilin.feedmejobs.Pojos.EngadgetResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
