@@ -10,11 +10,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        def keystorePropertiesFile = rootProject.file("keystore.properties")
-        def keystoreProperties = new Properties()
-        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-        buildConfigField "String", "API_KEY", keystoreProperties["BuzzFeedApiKey"]
+        buildConfigField("String", "BUZZFEED_KEY", BUZZFEED_API)
+        buildConfigField("String", "ENGADGET_KEY", ENGADGET_API)
     }
     buildTypes {
         release {
