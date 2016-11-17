@@ -4,7 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import nyc.c4q.huilin.feedmejobs.Pojos.Article;
 
 /**
  * Created by huilin on 10/30/16.
@@ -12,16 +17,20 @@ import android.widget.TextView;
 
 public class DataViewHolder extends RecyclerView.ViewHolder {
 
-    private final View view;
-    private final TextView drinkName;
-    private final TextView alcoholName;
+    private View view;
+    private TextView articleName;
+    private TextView authorText;
+    private TextView articleText;
+    public ImageView articleImage;
 
 
     public DataViewHolder(ViewGroup parent) {
         super(inflateView(parent));
         view = itemView;
-        drinkName = (TextView) view.findViewById(R.id.drink_name);
-        alcoholName = (TextView) view.findViewById(R.id.drink_alco);
+        articleName = (TextView) view.findViewById(R.id.article_title_tv);
+        authorText = (TextView) view.findViewById(R.id.author_tv);
+        articleText = (TextView) view.findViewById(R.id.article_text_tv);
+        articleImage = (ImageView) view.findViewById(R.id.background_image);
     }
 
 
@@ -31,16 +40,18 @@ public class DataViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public void bind(Data data) {
-        drinkName.setText(data.getDrinkName());
-        alcoholName.setText(data.getAlcoholType());
+    public void bind(Article data) {
+        articleName.setText(data.getTitle());
+        authorText.setText(data.getAuthor());
+//        articleText.setText(data.getDescription());
+        Picasso.with(view.getContext()).load(data.getUrlToImage()).into(articleImage);
     }
 
-    public TextView getDrinkName() {
-        return drinkName;
+    public TextView getarticleName() {
+        return articleName;
     }
 
     public TextView getAlcoholName() {
-        return alcoholName;
+        return articleText;
     }
 }
