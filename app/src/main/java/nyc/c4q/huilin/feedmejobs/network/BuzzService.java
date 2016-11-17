@@ -1,4 +1,4 @@
-package nyc.c4q.huilin.feedmejobs;
+package nyc.c4q.huilin.feedmejobs.network;
 
 import nyc.c4q.huilin.feedmejobs.Pojos.BuzzResponse;
 import retrofit2.Call;

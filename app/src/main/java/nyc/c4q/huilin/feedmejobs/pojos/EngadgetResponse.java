@@ -22,72 +22,56 @@ public class EngadgetResponse {
     private List<Article> articles = new ArrayList<Article>();
 
     /**
-     *
-     * @return
-     * The status
+     * @return The status
      */
     public String getStatus() {
         return status;
     }
 
     /**
-     *
-     * @param status
-     * The status
+     * @param status The status
      */
     public void setStatus(String status) {
         this.status = status;
     }
 
     /**
-     *
-     * @return
-     * The source
+     * @return The source
      */
     public String getSource() {
         return source;
     }
 
     /**
-     *
-     * @param source
-     * The source
+     * @param source The source
      */
     public void setSource(String source) {
         this.source = source;
     }
 
     /**
-     *
-     * @return
-     * The sortBy
+     * @return The sortBy
      */
     public String getSortBy() {
         return sortBy;
     }
 
     /**
-     *
-     * @param sortBy
-     * The sortBy
+     * @param sortBy The sortBy
      */
     public void setSortBy(String sortBy) {
         this.sortBy = sortBy;
     }
 
     /**
-     *
-     * @return
-     * The articles
+     * @return The articles
      */
     public List<Article> getArticles() {
         return articles;
     }
 
     /**
-     *
-     * @param articles
-     * The articles
+     * @param articles The articles
      */
     public void setArticles(List<Article> articles) {
         this.articles = articles;

@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +13,7 @@ import nyc.c4q.huilin.feedmejobs.Pojos.Article;
 import nyc.c4q.huilin.feedmejobs.Pojos.BuzzArticles;
 import nyc.c4q.huilin.feedmejobs.Pojos.BuzzResponse;
 import nyc.c4q.huilin.feedmejobs.Pojos.EngadgetResponse;
+import nyc.c4q.huilin.feedmejobs.network.BuzzService;
 import nyc.c4q.huilin.feedmejobs.network.EngadgetService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,41 +23,44 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-//    private RecyclerView recyclerView;
-    private static Retrofit retrofit;
-    private static Retrofit.Builder builder;
-
-    private DataAdapter adapter;
-
     private List<BuzzArticles> buzzArticlesList;
-
-
-    private static final String BUZZURL = "https://newsapi.org/";
-//    private static final String TAG = "Main Activity";
-    private final String SOURCE = "buzzfeed";
-    private final String SORT_BY = "latest";
-    private final String API_KEY = BuildConfig.API_KEY;
-
+    private List<Object> completeList = new ArrayList<>();
+    private static Retrofit retrofit;
     public static final String BASE_URL = "https://newsapi.org/";
     private static final String TAG = "MainActivity";
 
+
     private RecyclerView recyclerView;
     private List<Article> articleList;
-
-    //I believe Adapter should go here.
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        articleList = new ArrayList<>();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL) //base url
+        initRetrofit();
+        getEngadgetArticles();
+        getBuzzfeedArticles();
+        initRV(completeList);
+
+    }
+
+    private void initRV(List<Object> iHopeForLuck) {
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(new DataAdapter(getApplicationContext(), iHopeForLuck));
+    }
+
+    public void initRetrofit() {
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())  //for JSON to POJO else don't need
                 .build();
+    }
 
+    public void getEngadgetArticles() {
+        articleList = new ArrayList<>();
 
         EngadgetService service = retrofit.create(EngadgetService.class);
         Call<EngadgetResponse> call = service.getArticles();
@@ -66,12 +69,8 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<EngadgetResponse> call, Response<EngadgetResponse> response) {
                 EngadgetResponse engadgetResponse = response.body();
                 articleList = engadgetResponse.getArticles();
-                initRV(articleList);
+                completeList.addAll(articleList);
                 Log.d(TAG, "There was a success" + response);
-                Toast.makeText(MainActivity.this, "THIS WORKS!!!", Toast.LENGTH_SHORT).show();
-
-//        buzzArticlesList = new ArrayList<>();
-//        adapter = new DataAdapter(this);
             }
 
             @Override
@@ -82,27 +81,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void initRV(List<Article> articleList) {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-//        recyclerView.setAdapter(adapter);
-
-//        getBuzzfeedArticles();
-//        llm = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(llm);
-        recyclerView.setAdapter(new DataAdapter(getApplicationContext(),articleList));
-    }
-
 
     public void getBuzzfeedArticles() {
         Retrofit builder = new Retrofit.Builder()
-                .baseUrl(BUZZURL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         BuzzService buzzService = builder.create(BuzzService.class);
 
         Call<BuzzResponse> buzzArticleCall = buzzService.listBuzzArticles();
 
-//        Call<BuzzResponse> buzzArticleCall = buzzService.listBuzzArticles(SOURCE, SORT_BY, API_KEY);
         buzzArticleCall.enqueue(new Callback<BuzzResponse>() {
             @Override
             public void onResponse(Call<BuzzResponse> call, Response<BuzzResponse> response) {
@@ -110,14 +97,10 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     BuzzResponse buzzResp = response.body();
                     buzzArticlesList = buzzResp.getBuzzArticles();
-                   adapter.setBuzzArticles(buzzArticlesList);
-                    Log.i("LIST:", buzzArticlesList.size() + "");
+                    completeList.addAll(buzzArticlesList);
                     Log.d(TAG, "Success!" + response);
                 }
 
-//                else {
-//                    String errorMsg = response.errorBody().string();
-//                }
             }
 
             @Override
