@@ -23,6 +23,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String ENGADGET_KEY = BuildConfig.ENGADGET_KEY;
+    private static final String BUZZFEED_KEY = BuildConfig.BUZZFEED_KEY;
     private List<BuzzArticles> buzzArticlesList;
     private List<Object> completeList = new ArrayList<>();
     private static Retrofit retrofit;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private void initRV(List<Object> iHopeForLuck) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.setAdapter(new DataAdapter(getApplicationContext(), iHopeForLuck));
+        recyclerView.setAdapter(new DataAdapter(getApplicationContext(),iHopeForLuck));
     }
 
     public void initRetrofit() {
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         articleList = new ArrayList<>();
 
         EngadgetService service = retrofit.create(EngadgetService.class);
-        Call<EngadgetResponse> call = service.getArticles();
+        Call<EngadgetResponse> call = service.getArticles(ENGADGET_KEY);
         call.enqueue(new Callback<EngadgetResponse>() {
             @Override
             public void onResponse(Call<EngadgetResponse> call, Response<EngadgetResponse> response) {
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create()).build();
         BuzzService buzzService = builder.create(BuzzService.class);
 
-        Call<BuzzResponse> buzzArticleCall = buzzService.listBuzzArticles();
+        Call<BuzzResponse> buzzArticleCall = buzzService.listBuzzArticles(BUZZFEED_KEY);
 
         buzzArticleCall.enqueue(new Callback<BuzzResponse>() {
             @Override

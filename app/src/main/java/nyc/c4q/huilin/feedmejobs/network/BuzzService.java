@@ -3,6 +3,7 @@ package nyc.c4q.huilin.feedmejobs.network;
 import nyc.c4q.huilin.feedmejobs.Pojos.BuzzResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 /**
  * Created by Akasha on 11/11/16.
@@ -11,8 +12,8 @@ import retrofit2.http.GET;
 public interface BuzzService {
 
 
-    @GET("v1/articles?source=buzzfeed&sortBy=top&apiKey=4f8ad541e5a9432c9a0709367f701641")
-    Call<BuzzResponse> listBuzzArticles();
+    @GET("v1/articles?source=buzzfeed&sortBy=top")
+    Call<BuzzResponse> listBuzzArticles(@Query("apiKey") String apiKey);
 
 
 
