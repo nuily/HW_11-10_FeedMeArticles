@@ -12,6 +12,8 @@ import nyc.c4q.huilin.feedmejobs.NoteFeature.NoteItem;
 import nyc.c4q.huilin.feedmejobs.NoteFeature.NotesAdapter;
 import nyc.c4q.huilin.feedmejobs.NoteFeature.NotesDataSource;
 
+import static nyc.c4q.huilin.feedmejobs.NoteFeature.NoteItem.getNew;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE = 1111;
@@ -25,26 +27,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         notesDataSource = new NotesDataSource(getApplicationContext());
-        notesAdapter = new NotesAdapter(getApplicationContext());
+        notesAdapter = new NotesAdapter(getApplicationContext(), notesDataSource);
         initRV();
-
-
-//        NoteItem note = notes.get(0);
-//        note.setText("Updated!");
-//        notesDataSource.update(note);
-//
-//        notes = notesDataSource.findAll();
-//        note = notes.get(0);
-//        Log.i("NOTES", note.getKey() + ": " + note.getText());
-
 
     }
 
     private void initRV() {
-//        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-//        recyclerView.setAdapter(new DataAdapter());
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(notesAdapter);
@@ -66,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createNote() {
-        NoteItem note = NoteItem.getNew();
+        NoteItem note = getNew();
         Intent intent = new Intent(this, NoteEditorActivity.class);
         intent.putExtra(NoteEditorActivity.KEY, note.getKey());
         intent.putExtra(NoteEditorActivity.TEXT, note.getText());
@@ -84,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             note = new NoteItem();
-            note.setText(data.getStringExtra(NoteEditorActivity.KEY));
+            note.setKey(data.getStringExtra(NoteEditorActivity.KEY));
             note.setText(data.getStringExtra(NoteEditorActivity.TEXT));
-            notesDataSource.update(note);
+            notesDataSource.add(note);
             notesAdapter.notifyDataSetChanged();
             notesDataSource.viewAll();
 

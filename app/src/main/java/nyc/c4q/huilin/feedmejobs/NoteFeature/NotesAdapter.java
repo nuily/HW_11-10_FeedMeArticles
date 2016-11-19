@@ -19,9 +19,9 @@ public class NotesAdapter extends RecyclerView.Adapter {
     public NotesAdapter() {
     }
 
-    public NotesAdapter(Context context) {
+    public NotesAdapter(Context context, NotesDataSource notesDataSource) {
         this.context = context;
-        notesDataSource = new NotesDataSource(context);
+        this.notesDataSource = notesDataSource;
         noteList = notesDataSource.findAll();
     }
 

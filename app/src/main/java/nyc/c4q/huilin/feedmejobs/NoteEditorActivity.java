@@ -40,6 +40,8 @@ public class NoteEditorActivity extends AppCompatActivity {
     private void saveAndFinish() {
         editNote = (EditText) findViewById(R.id.note_writespace);
         String noteText = editNote.getText().toString();
+//        note.setText(editNote.getText().toString());
+//        note.setKey(note.getKey());
 
         Intent intent = new Intent();
         intent.putExtra(KEY, note.getKey());
