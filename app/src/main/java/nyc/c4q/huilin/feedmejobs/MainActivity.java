@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
             note.setKey(data.getStringExtra(NoteEditorActivity.KEY));
             note.setText(data.getStringExtra(NoteEditorActivity.TEXT));
             notesDataSource.add(note);
-            notesAdapter.notifyDataSetChanged();
             notesDataSource.viewAll();
+            notesAdapter.updateAdapter();
 
         }
     }

@@ -16,8 +16,7 @@ public class NotesAdapter extends RecyclerView.Adapter {
     private NotesDataSource notesDataSource;
     public List<NoteItem> noteList;
 
-    public NotesAdapter() {
-    }
+    public NotesAdapter(){}
 
     public NotesAdapter(Context context, NotesDataSource notesDataSource) {
         this.context = context;
@@ -52,5 +51,11 @@ public class NotesAdapter extends RecyclerView.Adapter {
 
     public List<NoteItem> getNoteList() {
         return noteList;
+    }
+
+    public void updateAdapter() {
+        noteList.clear();
+        this.noteList = notesDataSource.findAll();
+        notifyDataSetChanged();
     }
 }
