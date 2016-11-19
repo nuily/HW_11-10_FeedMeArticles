@@ -13,7 +13,7 @@ import nyc.c4q.huilin.feedmejobs.R;
  * Created by huilin on 11/8/16.
  */
 
-public class NotesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class NotesViewHolder extends RecyclerView.ViewHolder{
     private final View view;
     private final TextView title;
     private final TextView txtDisplay;
@@ -29,7 +29,7 @@ public class NotesViewHolder extends RecyclerView.ViewHolder implements View.OnC
         txtDisplay = (TextView) view.findViewById(R.id.note_display);
         date = (TextView) view.findViewById(R.id.dateTV);
         save = (Button) view.findViewById(R.id.save_notes);
-        itemView.setOnClickListener(this);
+//        itemView.setOnClickListener(this);
     }
 
 
@@ -45,14 +45,13 @@ public class NotesViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     }
 
-    @Override
-    public void onClick(View view) {
-        // Gets item position
-        int position = getAdapterPosition();
-
-        //Check if an item was deleted, or if user clicked it before UI removed it
-        if (position != RecyclerView.NO_POSITION) {
-            NoteItem noteItem = new NotesAdapter().getNoteList().get(position);
-        }
-    }
+//    @Override
+//    public void onClick(View view) {
+//        // Gets item position
+//        int position = getAdapterPosition();
+//
+//        //Check if an item was deleted, or if user clicked it before UI removed it
+//        if (position != RecyclerView.NO_POSITION) {
+//            NoteItem noteItem = new NotesAdapter().getNoteList().get(position);
+//        }
 }
