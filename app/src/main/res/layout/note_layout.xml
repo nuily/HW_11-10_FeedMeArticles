@@ -32,14 +32,6 @@
             android:padding="3dp"
             android:layout_below="@id/note_title" />
 
-        <Button
-            android:id="@+id/save_notes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true" />
-
         <TextView
             android:id="@+id/dateTV"
             android:layout_width="wrap_content"
