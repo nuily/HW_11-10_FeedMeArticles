@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import nyc.c4q.huilin.feedmejobs.NoteFeature.NoteItem;
+import nyc.c4q.huilin.feedmejobs.NoteFeature.NotesDataSource;
+import nyc.c4q.huilin.feedmejobs.NoteFeature.NotesViewHolder;
 import nyc.c4q.huilin.feedmejobs.Pojos.Article;
 import nyc.c4q.huilin.feedmejobs.Pojos.BuzzArticles;
 
@@ -20,12 +23,19 @@ public class DataAdapter extends RecyclerView.Adapter {
     private List<Object> items;
     private final int BUZZFEED = 0;
     private final int ENGADGET = 1;
+    private final int SHAREDPREF = 2;
+    private NotesDataSource notesDataSource;
 
-    public DataAdapter(Context context, List<Object> items) {
-        this.items = items;
+//     List<Object> items
+    public DataAdapter(Context context, NotesDataSource notesDataSource) {
+        this.notesDataSource = notesDataSource;
         this.context = context;
+
     }
 
+    public void setItems(List<Object> items) {
+        this.items = items;
+    }
 
     @Override
     public int getItemViewType(int position) {
@@ -33,8 +43,9 @@ public class DataAdapter extends RecyclerView.Adapter {
             return BUZZFEED;
         } else if (items.get(position) instanceof Article) {
             return ENGADGET;
+        } else {
+            return SHAREDPREF;
         }
-        return -1;
     }
 
     @Override
@@ -51,9 +62,15 @@ public class DataAdapter extends RecyclerView.Adapter {
                 ViewGroup v2 = (ViewGroup) layoutInflater.inflate(R.layout.view_layout, parent, false);
                 viewHolder = new DataViewHolder(v2);
                 break;
+            case SHAREDPREF:
+                ViewGroup v3 = (ViewGroup) layoutInflater.inflate(R.layout.note_layout, parent, false);
+                viewHolder = new NotesViewHolder(v3);
+                break;
         }
         return viewHolder;
     }
+
+
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
@@ -68,6 +85,10 @@ public class DataAdapter extends RecyclerView.Adapter {
                 Article article = (Article) items.get(position);
                 dataViewHolder.bind(article);
                 break;
+            case SHAREDPREF:
+                NotesViewHolder notesViewHolder = (NotesViewHolder) holder;
+                NoteItem noteItem =  (NoteItem) items.get(position);
+                notesViewHolder.bind(noteItem);
         }
 
     }
@@ -76,5 +97,13 @@ public class DataAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public void updateAdapter(List<BuzzArticles> buzzArticlesList, List<Article> articleList) {
+        items.clear();
+        items.addAll((notesDataSource.findAll()));
+        items.addAll(buzzArticlesList);
+        items.addAll(articleList);
+        notifyDataSetChanged();
     }
 }

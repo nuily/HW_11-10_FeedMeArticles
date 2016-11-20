@@ -24,6 +24,7 @@ public class DataViewHolder extends RecyclerView.ViewHolder {
     public ImageView articleImage;
 
 
+    // using ViewGroup (extends View) because it's passed in through the method calling this method
     public DataViewHolder(ViewGroup parent) {
         super(inflateView(parent));
         view = itemView;
